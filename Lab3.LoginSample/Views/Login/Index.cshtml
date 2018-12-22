@@ -1,0 +1,62 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <style>
+        .bs-example {
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            padding: 15px;
+            margin: 5px;
+            border-color: #c7c7c7;
+            border-style: solid;
+            border-width: 1px;
+        }
+
+        .captcha {
+            padding: 5px;
+            border-color: #c33232;
+            border-style: solid;
+            border-width: 1px;
+            color: #c33232;
+            background-color: #ffd4d4;
+        }
+    </style>
+    <title>Login</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        if (string.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div class="col-md-6 bs-example" data-example-id="basic-forms">
+                <div class="form-group">
+                    <label for="account">Account</label>
+                    <input type="text" class="form-control" name="account" placeholder="請輸入帳號">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="請輸入密碼">
+                </div>
+                <div class="form-group">
+                    <label for="captcha" class="captcha">@TempData["CAPTCHA"]</label>
+                    <input type="text" class="form-control" name="captcha" placeholder="請輸入驗證碼">
+                </div>
+                <br />
+                <button type="submit" class="btn btn-default">Login</button>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger" role="alert">@ViewBag.Message</div>
+            @Html.ActionLink("重新登入", "index");
+        }
+    }
+</body>
+</html>
